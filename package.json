@@ -1,0 +1,17 @@
+{
+  "name": "osu-tap-trainer",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Electron-based tapping trainer with metronome for osu! single tap & alternating.",
+  "main": "main.js",
+  "type": "module",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron .",
+    "pack": "electron-packager . osu-tap-trainer --platform=darwin,win32,linux --arch=x64,arm64 --overwrite"
+  },
+  "devDependencies": {
+    "electron": "^38.0.0",
+    "electron-packager": "^17.1.2"
+  }
+}

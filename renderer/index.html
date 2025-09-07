@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline';
+               img-src 'self' data:; media-src 'self' data:;" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>osu! Tap Trainer — Advanced</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header><h1>osu! Tap Trainer</h1></header>
+
+    <main>
+      <section class="controls">
+        <div class="field">
+          <label for="bpm">BPM</label
+          ><input id="bpm" type="number" value="180" />
+        </div>
+        <div class="field">
+          <label for="duration">Round Duration (s)</label
+          ><input id="duration" type="number" value="30" />
+        </div>
+        <div class="field">
+          <label for="leftKey">Key 1</label
+          ><input id="leftKey" type="text" maxlength="1" value="z" />
+        </div>
+        <div class="field">
+          <label for="rightKey">Key 2</label
+          ><input id="rightKey" type="text" maxlength="1" value="x" />
+        </div>
+        <div class="field">
+          <label for="window">Hit Window (±ms)</label
+          ><input id="window" type="number" value="30" />
+        </div>
+        <details class="field wide">
+          <summary>osu! Windows</summary>
+          <div class="grid-3">
+            <div>
+              <label for="w300">300</label
+              ><input id="w300" type="number" value="20" />
+            </div>
+            <div>
+              <label for="w100">100</label
+              ><input id="w100" type="number" value="50" />
+            </div>
+            <div>
+              <label for="w50">50</label
+              ><input id="w50" type="number" value="80" />
+            </div>
+          </div>
+        </details>
+        <button id="startBtn" class="primary">Start</button>
+        <button id="stopBtn" disabled>Stop</button>
+      </section>
+
+      <section class="metro">
+        <div class="dial" id="dial"><div class="needle" id="needle"></div></div>
+        <div class="beat-led" id="beatLed"></div>
+      </section>
+
+      <section class="stats">
+        <div class="stat">
+          <div class="label">Key 1 (<span id="k1Label">Z</span>)</div>
+          <div class="value" id="k1Count">0</div>
+        </div>
+        <div class="stat">
+          <div class="label">Key 2 (<span id="k2Label">X</span>)</div>
+          <div class="value" id="k2Count">0</div>
+        </div>
+        <div class="stat">
+          <div class="label">Accuracy</div>
+          <div class="value" id="acc">—</div>
+        </div>
+        <div class="stat">
+          <div class="label">Alternation</div>
+          <div class="value" id="alt">—</div>
+        </div>
+        <div class="stat">
+          <div class="label">Combo</div>
+          <div class="value" id="combo">0</div>
+        </div>
+        <div class="stat">
+          <div class="label">Max Combo</div>
+          <div class="value" id="maxCombo">0</div>
+        </div>
+        <div class="stat judges">
+          <div class="label">Judgements</div>
+          <div class="row">
+            <span class="pill j300">300</span><span id="j300">0</span>
+          </div>
+          <div class="row">
+            <span class="pill j100">100</span><span id="j100">0</span>
+          </div>
+          <div class="row">
+            <span class="pill j50">50</span><span id="j50">0</span>
+          </div>
+          <div class="row">
+            <span class="pill miss">MISS</span><span id="jmiss">0</span>
+          </div>
+        </div>
+        <div class="stat">
+          <div class="label">Time Left</div>
+          <div class="value" id="timeLeft">—</div>
+        </div>
+      </section>
+
+      <section class="charts">
+        <h2>Timing Offsets</h2>
+        <div class="chart-row">
+          <canvas id="offsetLine" width="900" height="220"></canvas>
+        </div>
+        <div class="chart-row">
+          <canvas id="offsetHist" width="900" height="220"></canvas>
+        </div>
+      </section>
+
+      <section class="log">
+        <h2>Round Summary</h2>
+        <pre id="summary"></pre>
+        <button id="exportBtn" disabled>Export JSON</button>
+      </section>
+
+      <section class="history">
+        <h2>History</h2>
+        <div class="actions">
+          <button id="openHistory">Open folder</button>
+          <button id="clearHistory">Clear history</button>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>BPM</th>
+              <th>Dur (s)</th>
+              <th>Acc %</th>
+              <th>Alt %</th>
+              <th>300/100/50/Miss</th>
+              <th>Max Combo</th>
+            </tr>
+          </thead>
+          <tbody id="historyBody"></tbody>
+        </table>
+      </section>
+    </main>
+
+    <script type="module" src="renderer.js"></script>
+  </body>
+</html>
